@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
-    public float curHealth;
-    public float maxHealth;
-    public float speed;
+    public int NodePoint;
+    public float CurHealth;
+    public float MaxHealth;
+    public float Speed;
     public int ID;
     
     public void Init()
     {
-        curHealth = maxHealth;
+        CurHealth = MaxHealth;
     }
     
 }

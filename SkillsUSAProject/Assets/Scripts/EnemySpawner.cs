@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    public static List<Enemies> enemiesAlive;
-    public static Dictionary<int, GameObject> enemyPrefab;
-    public static Dictionary<int, Queue<Enemies>> enemiesQueue;
+    public static List<Enemies> EnemiesAlive;
+    public static List<Transform> EnemiesAliveTransform;
+    public static Dictionary<int, GameObject> EnemyPrefab;
+    public static Dictionary<int, Queue<Enemies>> EnemiesQueue;
     private static bool IsInitilized;
 
-    // Start is called before the first frame update
+
     public static void Init()
     {
 
         if (!IsInitilized)
         {
-            enemyPrefab = new Dictionary<int, GameObject>();
-            enemiesQueue = new Dictionary<int, Queue<Enemies>>();
-            enemiesAlive = new List<Enemies>();
+            EnemyPrefab = new Dictionary<int, GameObject>();
+            EnemiesQueue = new Dictionary<int, Queue<Enemies>>();
+            EnemiesAlive = new List<Enemies>();
+            EnemiesAliveTransform = new List<Transform>();
 
             EnemySummonData[] Enemies = Resources.LoadAll<EnemySummonData>("Enemies");
             foreach (EnemySummonData enemy in Enemies)
             {
-                enemyPrefab.Add(enemy.enemyID, enemy.enemyPrefab);
-                enemiesQueue.Add(enemy.enemyID, new Queue<Enemies>());
+                EnemyPrefab.Add(enemy.EnemyID, enemy.EnemyPrefab);
+                EnemiesQueue.Add(enemy.EnemyID, new Queue<Enemies>());
             }
 
             IsInitilized = true;
@@ -36,12 +38,12 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
-    public static Enemies SpawnEnemy(int enemyID)
+    public static Enemies SpawnEnemy(int EnemyID)
     {
         Enemies SpawnedEnemy = null;
-        if(enemyPrefab.ContainsKey(enemyID))
+        if(EnemyPrefab.ContainsKey(EnemyID))
         {
-            Queue<Enemies> RefrencedQueue = enemiesQueue[enemyID];
+            Queue<Enemies> RefrencedQueue = EnemiesQueue[EnemyID];
 
             if (RefrencedQueue.Count > 0)
             {
@@ -53,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             else
             {
                 //Initilize new instance and initilize
-                GameObject newEnemy = Instantiate(enemyPrefab[enemyID],Vector3.zero, Quaternion.identity);
+                GameObject newEnemy = Instantiate(EnemyPrefab[EnemyID],Vector3.zero, Quaternion.identity);
                 SpawnedEnemy = newEnemy.GetComponent<Enemies>();
                 SpawnedEnemy.Init();
             }
@@ -62,14 +64,16 @@ public class EnemySpawner : MonoBehaviour
         {
             return null;
         }
-        enemiesAlive.Add(SpawnedEnemy);
-        SpawnedEnemy.ID = enemyID;
+        EnemiesAliveTransform.Add(SpawnedEnemy.transform);
+        EnemiesAlive.Add(SpawnedEnemy);
+        SpawnedEnemy.ID = EnemyID;
         return SpawnedEnemy;
     }
     public static void RemoveEnemy(Enemies EnemyToRemove)
     {
-        enemiesQueue[EnemyToRemove.ID].Enqueue(EnemyToRemove);
+        EnemiesQueue[EnemyToRemove.ID].Enqueue(EnemyToRemove);
         EnemyToRemove.gameObject.SetActive(false);
-        enemiesAlive.Remove(EnemyToRemove);
+        EnemiesAliveTransform.Remove(EnemyToRemove.transform);
+        EnemiesAlive.Remove(EnemyToRemove);
     }
 }
