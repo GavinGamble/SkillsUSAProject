@@ -13,6 +13,8 @@ public class Enemies : MonoBehaviour
     public void Init()
     {
         CurHealth = MaxHealth;
+        transform.position = GameController.NodePos[0];
+        NodePoint = 0;
     }
     
 }

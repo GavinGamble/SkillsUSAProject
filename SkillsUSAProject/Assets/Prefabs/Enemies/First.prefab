@@ -118,7 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a09a655b0d4d7484aaae9a46c859f311, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  curHealth: 0
-  maxHealth: 5
-  speed: 4
-  ID: 0
+  NodePoint: 0
+  CurHealth: 0
+  MaxHealth: 5
+  Speed: 5
+  ID: 1

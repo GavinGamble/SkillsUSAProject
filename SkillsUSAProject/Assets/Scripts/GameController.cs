@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EnemiesToRemove = new Queue<Enemies>();
         EnemyIDToSpawn = new Queue<int>();
         EnemySpawner.Init();
 
@@ -27,9 +28,8 @@ public class GameController : MonoBehaviour
             NodePos[i] = NodeParent.GetChild(i).position;
         }
 
-        //StartCoroutine(GameLoop());
-        //InvokeRepeating("TestSpawn", 0, 10);
-        //InvokeRepeating("TestRemove", 0, 1.5f);
+        StartCoroutine(GameLoop());
+        InvokeRepeating("TestSpawn", 0, 10);
     }
 
     void TestSpawn()
@@ -37,13 +37,6 @@ public class GameController : MonoBehaviour
         EnqueueEnemyIDToSPawn(1);
     }
 
-    void TestRemove()
-    {
-        if(EnemySpawner.EnemiesAlive.Count > 0)
-        {
-            EnemySpawner.RemoveEnemy(EnemySpawner.EnemiesAlive[Random.Range(0, EnemySpawner.EnemiesAlive.Count)]);
-        }
-    }
 
     IEnumerator GameLoop()
     {
@@ -75,8 +68,8 @@ public class GameController : MonoBehaviour
 
             for (int i = 0; i < EnemySpawner.EnemiesAlive.Count; i++)
             {
-                EnemySpeed[0] = EnemySpawner.EnemiesAlive[i].Speed;
-                NodeIndexes[0] = EnemySpawner.EnemiesAlive[i].NodePoint;
+                EnemySpeed[i] = EnemySpawner.EnemiesAlive[i].Speed;
+                NodeIndexes[i] = EnemySpawner.EnemiesAlive[i].NodePoint;
             }
 
             MoveEnemiesJob MoveEnemies = new MoveEnemiesJob
@@ -94,6 +87,11 @@ public class GameController : MonoBehaviour
             for(int i = 0; i < EnemySpawner.EnemiesAlive.Count; i++)
             {
                 EnemySpawner.EnemiesAlive[i].NodePoint = NodeIndexes[i];
+
+                if (EnemySpawner.EnemiesAlive[i].NodePoint == NodePos.Length)
+                {
+                    EnqueueEnemyToRemove(EnemySpawner.EnemiesAlive[i]);
+                }
             }
 
             NodeIndexes.Dispose();
@@ -117,19 +115,23 @@ public class GameController : MonoBehaviour
 
     public struct MoveEnemiesJob : IJobParallelForTransform
     {
+        [NativeDisableParallelForRestriction]
         public NativeArray<float> EnemySpeed;
+        [NativeDisableParallelForRestriction]
         public NativeArray<Vector3> NodePos;
+        [NativeDisableParallelForRestriction]
         public NativeArray<int> NodeIndex;
         public float deltaTime;
         public void Execute(int index, TransformAccess transform)
         {
-            Vector3 PosToMoveTo = NodePos[NodeIndex[index]];
-
-            transform.position = Vector3.MoveTowards(transform.position, PosToMoveTo, EnemySpeed[index] * deltaTime);
-
-            if(transform.position == PosToMoveTo)
+            if (NodeIndex[index] < NodePos.Length)
             {
-                NodeIndex[index]++;
+                Vector3 PosToMoveTo = NodePos[NodeIndex[index]];
+            transform.position = Vector3.MoveTowards(transform.position, PosToMoveTo, EnemySpeed[index] * deltaTime);
+            if (transform.position == PosToMoveTo)
+                {
+                    NodeIndex[index]++;
+                }
             }
         }
     }

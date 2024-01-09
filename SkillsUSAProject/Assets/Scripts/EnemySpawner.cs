@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             else
             {
                 //Initilize new instance and initilize
-                GameObject newEnemy = Instantiate(EnemyPrefab[EnemyID],Vector3.zero, Quaternion.identity);
+                GameObject newEnemy = Instantiate(EnemyPrefab[EnemyID], GameController.NodePos[0], Quaternion.identity);
                 SpawnedEnemy = newEnemy.GetComponent<Enemies>();
                 SpawnedEnemy.Init();
             }
