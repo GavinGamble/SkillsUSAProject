@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -44.70534
+      value: -3.8629885
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.010000229
+      value: -0.010002136
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -59.032063
+      value: -90.2798
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -118,7 +118,11 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 79aa69e13348b374a811f44cba87beed, type: 2}
     - target: {fileID: 919132149155446097, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
       propertyPath: m_Name
-      value: ArcherTower
+      value: ArcherTower(Wood)
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
+      propertyPath: m_TagString
+      value: CantPlace
       objectReference: {fileID: 0}
     - target: {fileID: 1442450553484104045, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -160,5 +164,34 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: -1599826595754709761, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 76334537962036946}
   m_SourcePrefab: {fileID: 100100000, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
+--- !u!1 &7309293631022330925 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: ac5f061d4b50d794d8a66b6d4562628a, type: 3}
+  m_PrefabInstance: {fileID: 7615228551105694076}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &76334537962036946
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7309293631022330925}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7, y: 12.047618, z: 7}
+  m_Center: {x: 0, y: 6.42623, z: 0}
