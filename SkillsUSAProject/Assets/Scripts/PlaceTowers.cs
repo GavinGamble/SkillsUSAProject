@@ -48,7 +48,7 @@ public class PlaceTowers : MonoBehaviour
 
     public void PlaceTower(GameObject Tower)
     {
-        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.identity);
+        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0,270,0));
     }
     public void QuitGame()
     {
