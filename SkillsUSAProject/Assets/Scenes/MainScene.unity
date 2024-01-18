@@ -10245,6 +10245,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a68936658eaf346429a20e812727a97e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CheckPlacement:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  PlacementCollider:
+    serializedVersion: 2
+    m_Bits: 119
   PlayersCamera: {fileID: 963194227}
 --- !u!4 &1381001430
 Transform:
@@ -15609,7 +15615,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0486ff338ef761249a37cb8d35fa3380, type: 3}
       propertyPath: m_TagString
-      value: CanPlace
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
