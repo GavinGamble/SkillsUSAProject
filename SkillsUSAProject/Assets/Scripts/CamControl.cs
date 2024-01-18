@@ -24,11 +24,15 @@ public class CamControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-        mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        if(Input.GetMouseButton(1))
+        {
+            movementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
+            mouseInput = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 
-        MoveCamPos();
-        RotateCam();
+            MoveCamPos();
+            RotateCam();
+        }
+        
     }
     private void MoveCamPos()
     {
