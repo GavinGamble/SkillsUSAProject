@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Targeting;
 
 public class PlaceTowers : MonoBehaviour
 {
@@ -11,25 +12,27 @@ public class PlaceTowers : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(TowerToPlace != null)
+        if (TowerToPlace != null)
         {
             Ray camray = PlayersCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit HitInfo;
 
-            if(Physics.Raycast(camray, out  HitInfo, 100f, PlacementCollider))
+            if (Physics.Raycast(camray, out HitInfo, 100f, PlacementCollider))
             {
                 TowerToPlace.transform.position = HitInfo.point;
             }
-            if(Input.GetMouseButtonDown(0) && HitInfo.collider.gameObject != null)
+            if (Input.GetMouseButtonDown(0) && HitInfo.collider.gameObject != null)
             {
-                if(!HitInfo.collider.gameObject.CompareTag("CantPlace"))
+                if (!HitInfo.collider.gameObject.CompareTag("CantPlace"))
                 {
+                    GameController.TowersInGame.Add(TowerToPlace.GetComponent<TowerBehavior>());
+
                     BoxCollider TowersCollider = TowerToPlace.gameObject.GetComponent<BoxCollider>();
                     TowersCollider.isTrigger = true;
                     Vector3 BoxCenter = TowerToPlace.gameObject.transform.position + TowersCollider.center;
@@ -40,15 +43,15 @@ public class PlaceTowers : MonoBehaviour
                         TowerToPlace = null;
                     }
                 }
-                
-                
+
+
             }
         }
     }
 
     public void PlaceTower(GameObject Tower)
     {
-        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0,270,0));
+        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0, 270, 0));
     }
     public void QuitGame()
     {

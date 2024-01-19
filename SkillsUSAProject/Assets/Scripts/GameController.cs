@@ -5,11 +5,15 @@ using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
 
+
 public class GameController : MonoBehaviour
 {
+    public static float[] NodeDistance;
+    public static List<TowerBehavior> TowersInGame;
+
     public static Vector3[] NodePos;
     public Transform NodeParent;
-   
+
     public bool GameShouldStop;
 
     private static Queue<Enemies> EnemiesToRemove;
@@ -17,17 +21,25 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        TowersInGame = new List<TowerBehavior>();
         EnemiesToRemove = new Queue<Enemies>();
         EnemyIDToSpawn = new Queue<int>();
         EnemySpawner.Init();
 
         NodePos = new Vector3[NodeParent.childCount];
 
-        for(int i = 0; i < NodePos.Length; i++)
+        for (int i = 0; i < NodePos.Length; i++)
         {
             NodePos[i] = NodeParent.GetChild(i).position;
         }
 
+        NodeDistance = new float[NodePos.Length - 1];
+
+        for (int i = 0; i < NodeDistance.Length; i++)
+        {
+            NodeDistance[i] = Vector3.Distance(NodePos[i], NodePos[i + 1]);
+        }
         StartCoroutine(GameLoop());
         InvokeRepeating("TestSpawn", 0, 10);
     }
@@ -40,12 +52,12 @@ public class GameController : MonoBehaviour
 
     IEnumerator GameLoop()
     {
-        while(GameShouldStop == false)
+        while (GameShouldStop == false)
         {
             //Spawn Enemies
-            if(EnemyIDToSpawn.Count > 0)
+            if (EnemyIDToSpawn.Count > 0)
             {
-                for(int i = 0; i < EnemyIDToSpawn.Count; i++)
+                for (int i = 0; i < EnemyIDToSpawn.Count; i++)
                 {
                     EnemySpawner.SpawnEnemy(EnemyIDToSpawn.Dequeue());
                 }
@@ -62,9 +74,9 @@ public class GameController : MonoBehaviour
 
             //move enemies
             NativeArray<Vector3> NodesToUse = new NativeArray<Vector3>(NodePos, Allocator.TempJob);
-            NativeArray<int> NodeIndexes = new NativeArray<int>(EnemySpawner.EnemiesAlive.Count , Allocator.TempJob);
+            NativeArray<int> NodeIndexes = new NativeArray<int>(EnemySpawner.EnemiesAlive.Count, Allocator.TempJob);
             NativeArray<float> EnemySpeed = new NativeArray<float>(EnemySpawner.EnemiesAlive.Count, Allocator.TempJob);
-            TransformAccessArray EnemyAccess = new TransformAccessArray(EnemySpawner.EnemiesAliveTransform.ToArray(),2);
+            TransformAccessArray EnemyAccess = new TransformAccessArray(EnemySpawner.EnemiesAliveTransform.ToArray(), 2);
 
             for (int i = 0; i < EnemySpawner.EnemiesAlive.Count; i++)
             {
@@ -84,7 +96,7 @@ public class GameController : MonoBehaviour
             JobHandle MoveHandle = MoveEnemies.Schedule(EnemyAccess);
             MoveHandle.Complete();
 
-            for(int i = 0; i < EnemySpawner.EnemiesAlive.Count; i++)
+            for (int i = 0; i < EnemySpawner.EnemiesAlive.Count; i++)
             {
                 EnemySpawner.EnemiesAlive[i].NodePoint = NodeIndexes[i];
 
@@ -100,6 +112,13 @@ public class GameController : MonoBehaviour
             EnemyAccess.Dispose();
 
             yield return null;
+
+            //tick towers
+            /*foreach(TowerBehavior tower in TowersInGame)
+            {
+                tower.Target = Targeting.GetTarget(tower, Targeting.TargetType.First);
+                tower.Tick();
+            }*/
         }
     }
 
@@ -127,8 +146,8 @@ public class GameController : MonoBehaviour
             if (NodeIndex[index] < NodePos.Length)
             {
                 Vector3 PosToMoveTo = NodePos[NodeIndex[index]];
-            transform.position = Vector3.MoveTowards(transform.position, PosToMoveTo, EnemySpeed[index] * deltaTime);
-            if (transform.position == PosToMoveTo)
+                transform.position = Vector3.MoveTowards(transform.position, PosToMoveTo, EnemySpeed[index] * deltaTime);
+                if (transform.position == PosToMoveTo)
                 {
                     NodeIndex[index]++;
                 }
