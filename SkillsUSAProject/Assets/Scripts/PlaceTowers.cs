@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Targeting;
+
 
 public class PlaceTowers : MonoBehaviour
 {
@@ -31,17 +31,20 @@ public class PlaceTowers : MonoBehaviour
             {
                 if (!HitInfo.collider.gameObject.CompareTag("CantPlace"))
                 {
-                    GameController.TowersInGame.Add(TowerToPlace.GetComponent<TowerBehavior>());
-
-                    BoxCollider TowersCollider = TowerToPlace.gameObject.GetComponent<BoxCollider>();
-                    TowersCollider.isTrigger = true;
-                    Vector3 BoxCenter = TowerToPlace.gameObject.transform.position + TowersCollider.center;
-                    Vector3 HalfExtent = TowersCollider.size / 2;
-                    if (!Physics.CheckBox(BoxCenter, HalfExtent, Quaternion.identity, CheckPlacement, QueryTriggerInteraction.Ignore))
+                    
+                    if(!HitInfo.collider.gameObject.CompareTag("Tower"))
                     {
-                        TowersCollider.isTrigger = false;
-                        TowerToPlace = null;
+                        BoxCollider TowersCollider = TowerToPlace.gameObject.GetComponent<BoxCollider>();
+                        TowersCollider.isTrigger = true;
+                        Vector3 BoxCenter = TowerToPlace.gameObject.transform.position + TowersCollider.center;
+                        Vector3 HalfExtent = TowersCollider.size / 2;
+                        if (!Physics.CheckBox(BoxCenter, HalfExtent, Quaternion.identity, CheckPlacement, QueryTriggerInteraction.Ignore))
+                        {
+                            TowersCollider.isTrigger = false;
+                            TowerToPlace = null;
+                        }
                     }
+                    
                 }
 
 
@@ -51,10 +54,14 @@ public class PlaceTowers : MonoBehaviour
 
     public void PlaceTower(GameObject Tower)
     {
-        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0, 270, 0));
+        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0, 0, 0));
     }
     public void QuitGame()
     {
         Application.Quit();
+    }
+    public void Restart()
+    {
+
     }
 }

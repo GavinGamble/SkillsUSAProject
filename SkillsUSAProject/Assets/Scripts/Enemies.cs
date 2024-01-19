@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Enemies : MonoBehaviour
 {
+    
     public int NodePoint;
     public float CurHealth;
     public float MaxHealth;
     public float Speed;
     public int ID;
+    public int EnemyDamage;
     
     public void Init()
     {
@@ -16,5 +18,10 @@ public class Enemies : MonoBehaviour
         transform.position = GameController.NodePos[0];
         NodePoint = 0;
     }
+    public void Health(float Value)
+    {
+        CurHealth += Value;
+    }
     
+
 }

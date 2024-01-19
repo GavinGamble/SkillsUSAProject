@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dea7d88da9657e441a8a1e049af99af8, type: 3}
-  m_Name: Basic
+  m_Name: Orc
   m_EditorClassIdentifier: 
-  EnemyPrefab: {fileID: 5486117495477209284, guid: 93d7934d4592bc540b5fa52eaadc8471, type: 3}
-  EnemyID: 1
+  EnemyPrefab: {fileID: 1763029139158682114, guid: 68ac3bbba53c6ae4084c8e16154ef176, type: 3}
+  EnemyID: 2

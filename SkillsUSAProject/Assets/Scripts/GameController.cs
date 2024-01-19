@@ -4,13 +4,16 @@ using Unity.Collections;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
+using UnityEngine.UI;
 
 
 public class GameController : MonoBehaviour
 {
     public static float[] NodeDistance;
-    public static List<TowerBehavior> TowersInGame;
+    public Enemies enemies;
+    public GameObject GameoverScreen;
 
+    public int TowerHealth = 100;
     public static Vector3[] NodePos;
     public Transform NodeParent;
 
@@ -22,7 +25,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
 
-        TowersInGame = new List<TowerBehavior>();
+        
         EnemiesToRemove = new Queue<Enemies>();
         EnemyIDToSpawn = new Queue<int>();
         EnemySpawner.Init();
@@ -34,19 +37,15 @@ public class GameController : MonoBehaviour
             NodePos[i] = NodeParent.GetChild(i).position;
         }
 
-        NodeDistance = new float[NodePos.Length - 1];
-
-        for (int i = 0; i < NodeDistance.Length; i++)
-        {
-            NodeDistance[i] = Vector3.Distance(NodePos[i], NodePos[i + 1]);
-        }
+       
         StartCoroutine(GameLoop());
         InvokeRepeating("TestSpawn", 0, 10);
     }
 
     void TestSpawn()
     {
-        EnqueueEnemyIDToSPawn(1);
+        int EnemyToSpawn = Random.Range(1, 3);
+        EnqueueEnemyIDToSPawn(EnemyToSpawn);
     }
 
 
@@ -69,6 +68,7 @@ public class GameController : MonoBehaviour
                 for (int i = 0; i < EnemiesToRemove.Count; i++)
                 {
                     EnemySpawner.RemoveEnemy(EnemiesToRemove.Dequeue());
+                    
                 }
             }
 
@@ -103,6 +103,7 @@ public class GameController : MonoBehaviour
                 if (EnemySpawner.EnemiesAlive[i].NodePoint == NodePos.Length)
                 {
                     EnqueueEnemyToRemove(EnemySpawner.EnemiesAlive[i]);
+                    TowerHealth -= enemies.EnemyDamage;
                 }
             }
 
@@ -112,13 +113,13 @@ public class GameController : MonoBehaviour
             EnemyAccess.Dispose();
 
             yield return null;
-
-            //tick towers
-            /*foreach(TowerBehavior tower in TowersInGame)
+            if(TowerHealth <= 0)
             {
-                tower.Target = Targeting.GetTarget(tower, Targeting.TargetType.First);
-                tower.Tick();
-            }*/
+                GameShouldStop = true;
+                GameoverScreen.gameObject.SetActive(true);
+
+            }
+            
         }
     }
 
