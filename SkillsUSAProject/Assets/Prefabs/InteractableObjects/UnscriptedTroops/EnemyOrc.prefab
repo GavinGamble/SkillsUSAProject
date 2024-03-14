@@ -230,6 +230,6 @@ MonoBehaviour:
   NodePoint: 0
   CurHealth: 0
   MaxHealth: 25
-  Speed: 2
+  Speed: 5
   ID: 2
   EnemyDamage: 25

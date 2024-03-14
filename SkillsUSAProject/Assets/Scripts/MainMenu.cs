@@ -19,7 +19,7 @@ public class MainMenu : MonoBehaviour
     }
     public void OpenSandbox()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
     }
     public void Restart()
     {
