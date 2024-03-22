@@ -25,6 +25,7 @@ public class WaypointBehavior : MonoBehaviour
 
         if (currentWP >= waypoints.Length)
         {
+
             currentWP = 0;
         }
 
