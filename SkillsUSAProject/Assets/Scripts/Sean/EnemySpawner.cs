@@ -7,6 +7,8 @@ public class EnemySpawner : MonoBehaviour
     public int waveNumber = 1;
     private float spawnInterval = 2.0f;
     private int enemiesToSpawn = 5;
+    private int coinsForWaveCompletion = 10; // Coins awarded for completing a wave
+    private int coinsForKill = 2; // Coins awarded for each enemy kill
 
     void Start()
     {
@@ -27,6 +29,11 @@ public class EnemySpawner : MonoBehaviour
             waveNumber++;
             enemiesToSpawn += 2; // Increase the number of enemies per wave
             spawnInterval *= 0.9f; // Optional: decrease spawn interval to make it harder
+            // Update wave number in UI
+            UIManager.Instance.UpdateWaveNumber(waveNumber);
+
+            // Reward player for surviving a wave
+            UIManager.Instance.AddCoins(coinsForWaveCompletion);
 
             yield return new WaitForSeconds(10); // Wait before next wave
         }
