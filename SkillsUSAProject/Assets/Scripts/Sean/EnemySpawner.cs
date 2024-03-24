@@ -53,4 +53,9 @@ public class EnemySpawner : MonoBehaviour
             return 0; // Spawn the easiest enemy
         }
     }
+
+    private void Update()
+    {
+        
+    }
 }

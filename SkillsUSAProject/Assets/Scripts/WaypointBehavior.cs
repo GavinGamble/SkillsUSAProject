@@ -18,7 +18,8 @@ public class WaypointBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(this.transform.position, waypoints[currentWP].transform.position) < 3.0f)
+
+        if (Vector3.Distance(transform.position, waypoints[currentWP].transform.position) < 3.0f)
         {
             currentWP++;
         }
@@ -29,7 +30,7 @@ public class WaypointBehavior : MonoBehaviour
             currentWP = 0;
         }
 
-        this.transform.LookAt(waypoints[currentWP].transform.position);
-        transform.Translate(Vector3.fwd * speed * Time.deltaTime);
+        transform.LookAt(waypoints[currentWP].transform.position);
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 }

@@ -807,7 +807,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fd9f25ed5c268847a95fc7d2d95c057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   speed: 30
 --- !u!1 &5384091253297190101
 GameObject:
