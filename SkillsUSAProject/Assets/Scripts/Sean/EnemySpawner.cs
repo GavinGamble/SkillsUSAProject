@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
         Instantiate(enemyPrefabs[enemyIndex], transform.position, Quaternion.identity);
     }
 
-    int ChooseEnemyIndex()
+    public int ChooseEnemyIndex()
     {
         // Simple logic to increase the chance of harder enemies over waves
         float progress = (float)waveNumber / 10; // Adjust this based on your game's difficulty curve

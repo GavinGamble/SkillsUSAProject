@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class EnemySpawningly : MonoBehaviour
 {
-    int wave = 1;
-    public GameObject[] waypoints1;
-    public int currentWP = 0;
+
+    public GameObject enemy;
+
+    
 
     // Start is called before the first frame update
     void Start()
@@ -20,8 +22,8 @@ public class GameManager : MonoBehaviour
         
     }
 
-    void nextWave()
+    void SpawnEnemies()
     {
-        wave++;
+
     }
 }

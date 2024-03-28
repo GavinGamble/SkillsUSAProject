@@ -5,19 +5,26 @@ using UnityEngine;
 public class WaypointBehavior : MonoBehaviour
 {
     public GameObject[] waypoints;
-    int currentWP = 0;
+    public int currentWP = 0;
 
     public float speed = 30.0f;
+    GameManager gameManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        gameManager = GetComponent<GameManager>();   
     }
 
+    
     // Update is called once per frame
     void Update()
     {
+
+        gameManager.waypoints1 = waypoints;
+        gameManager.currentWP = currentWP;
+        
+
 
         if (Vector3.Distance(transform.position, waypoints[currentWP].transform.position) < 3.0f)
         {
