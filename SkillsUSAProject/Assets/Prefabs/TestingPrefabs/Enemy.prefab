@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4566209106193621007}
   - component: {fileID: 8336208167640148964}
   - component: {fileID: 72916464420099668}
-  - component: {fileID: 779762289848456276}
+  - component: {fileID: 3026987525194588722}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -100,13 +100,13 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &779762289848456276
+--- !u!114 &3026987525194588722
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,9 +115,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 6634280027618782114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c4deb67800f1c643a0cd514baf147ea, type: 3}
+  m_Script: {fileID: 11500000, guid: 5fd9f25ed5c268847a95fc7d2d95c057, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
-  theGameManager: {fileID: 0}
+  waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   currentWP: 0
+  speed: 30
