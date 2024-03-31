@@ -160,7 +160,7 @@ PrefabInstance:
       addedObject: {fileID: 5955407411833374524}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a4bae40603d154983cdd016e2617a8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: -78188806502940092}
+      addedObject: {fileID: -3443827151531770317}
   m_SourcePrefab: {fileID: 100100000, guid: b7a4bae40603d154983cdd016e2617a8, type: 3}
 --- !u!1 &1763029139158682114 stripped
 GameObject:
@@ -215,7 +215,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 3.3506439, z: 1}
   m_Center: {x: 0, y: 1.1753201, z: 0}
---- !u!114 &-78188806502940092
+--- !u!114 &-3443827151531770317
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -224,11 +224,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1763029139158682114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd9f25ed5c268847a95fc7d2d95c057, type: 3}
+  m_Script: {fileID: 11500000, guid: f53ba40b1bacb5d45adb8ed344fbb2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   speed: 30
+  currentWP: 0

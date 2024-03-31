@@ -756,7 +756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3883484468676866862}
-  - component: {fileID: 3384242408840387960}
+  - component: {fileID: 4902207524710865903}
   m_Layer: 0
   m_Name: StrongerSkeleton
   m_TagString: Untagged
@@ -795,7 +795,7 @@ Transform:
   - {fileID: 4076857449678587165}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3384242408840387960
+--- !u!114 &4902207524710865903
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -804,14 +804,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4516890665334565268}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd9f25ed5c268847a95fc7d2d95c057, type: 3}
+  m_Script: {fileID: 11500000, guid: f53ba40b1bacb5d45adb8ed344fbb2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   speed: 30
+  currentWP: 0
 --- !u!1 &5384091253297190101
 GameObject:
   m_ObjectHideFlags: 0

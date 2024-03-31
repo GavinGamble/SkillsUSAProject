@@ -383,7 +383,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a4bae40603d154983cdd016e2617a8, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 9121938225390380068}
+      addedObject: {fileID: -2974550022608158024}
   m_SourcePrefab: {fileID: 100100000, guid: b7a4bae40603d154983cdd016e2617a8, type: 3}
 --- !u!4 &2440464324769206837 stripped
 Transform:
@@ -395,7 +395,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b7a4bae40603d154983cdd016e2617a8, type: 3}
   m_PrefabInstance: {fileID: 2762109698510206430}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9121938225390380068
+--- !u!114 &-2974550022608158024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -404,14 +404,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3068523592406894735}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd9f25ed5c268847a95fc7d2d95c057, type: 3}
+  m_Script: {fileID: 11500000, guid: f53ba40b1bacb5d45adb8ed344fbb2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   speed: 30
+  currentWP: 0
 --- !u!1001 &9050909806566498987
 PrefabInstance:
   m_ObjectHideFlags: 0
