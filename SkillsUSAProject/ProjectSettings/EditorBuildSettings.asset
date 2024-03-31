@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelOne.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/UnUsedScenes/LevelTwoBeta.unity
-    guid: 2bf5ff5634bc2d248b5fee2fb59f6f61
+    path: Assets/Scenes/LevelTwo.unity
+    guid: a4179ea8d1b86bb42a6339d8121e3703
   - enabled: 1
     path: Assets/Scenes/Sandbox.unity
     guid: c2cd8eedefe6bf44c80d2d722e7e9fd9
