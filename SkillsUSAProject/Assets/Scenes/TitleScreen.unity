@@ -25178,7 +25178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   songs:
-  - {fileID: 8300000, guid: c5d1f6e9e9c098f44b3bf96747ffe8c2, type: 3}
+  - {fileID: 8300000, guid: d1a48cf969c86d248b5651ec2d44ab03, type: 3}
+  - {fileID: 8300000, guid: 7a97a0a1b269b3f46a53efa8257274b4, type: 3}
 --- !u!1 &1615978206
 GameObject:
   m_ObjectHideFlags: 0
