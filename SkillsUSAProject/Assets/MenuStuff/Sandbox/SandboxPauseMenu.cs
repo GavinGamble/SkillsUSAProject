@@ -11,7 +11,7 @@ public class SandboxPauseMenu : MonoBehaviour
     public static bool isPaused;
     public void SetVolume(float volume)
     {
-        SandBoxMixer.SetFloat("LevelTwoVolume", volume);
+        SandBoxMixer.SetFloat("SandboxVolume", volume);
     }
     public void QuitGame()
     {

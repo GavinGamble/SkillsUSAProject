@@ -1,46 +1,60 @@
-using System.Collections;
 using UnityEngine;
+using TMPro;
 
 public class MusicManager : MonoBehaviour
 {
     public AudioClip[] songs;
     private AudioSource audioSource;
+    private int currentSongIndex = -1; // Start with -1 to indicate no song is playing
 
-    private void Start()
+    public TMP_Text songText; // Reference to the TextMeshPro Text component
+
+    void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(PlayRandomSong());
+        PlayRandomSong();
     }
 
-    private IEnumerator PlayRandomSong()
+    void UpdateSongText()
     {
-        while (true)
+        if (songText != null && currentSongIndex >= 0 && currentSongIndex < songs.Length)
         {
-            int randomIndex = Random.Range(0, songs.Length);
-            AudioClip selectedSong = songs[randomIndex];
+            songText.text = "Now Playing: " + songs[currentSongIndex].name;
+        }
+    }
 
-            // Play the selected song
-            audioSource.clip = selectedSong;
+    void PlayRandomSong()
+    {
+        if (songs.Length > 0)
+        {
+            currentSongIndex = Random.Range(0, songs.Length);
+            audioSource.clip = songs[currentSongIndex];
             audioSource.Play();
-
-            // Wait until the song is finished playing
-            yield return new WaitForSeconds(selectedSong.length);
-
-            // Remove the played song from the array
-            songs = RemoveAt(songs, randomIndex);
+            UpdateSongText(); // Update the song text when playing a new song
         }
     }
 
-    private T[] RemoveAt<T>(T[] array, int index)
+    public void PlayNextSong()
     {
-        T[] newArray = new T[array.Length - 1];
-        for (int i = 0, j = 0; i < array.Length; i++)
+        currentSongIndex = (currentSongIndex + 1) % songs.Length;
+        PlayCurrentSong();
+    }
+
+    public void PlayPreviousSong()
+    {
+        currentSongIndex = (currentSongIndex - 1 + songs.Length) % songs.Length;
+        PlayCurrentSong();
+    }
+
+    void PlayCurrentSong()
+    {
+        if (currentSongIndex >= 0 && currentSongIndex < songs.Length)
         {
-            if (i != index)
-            {
-                newArray[j++] = array[i];
-            }
+            audioSource.clip = songs[currentSongIndex];
+            audioSource.Play();
+            UpdateSongText(); // Update the song text when playing a new song
         }
-        return newArray;
     }
 }
+
+
