@@ -8,10 +8,10 @@ public class LevelOnePauseMenu : MonoBehaviour
 {
     public GameObject PauseMenu;
     public AudioMixer LevelOneMixer;
-    public bool isPaused;
+    public static bool isPaused;
     public void SetVolume(float volume)
     {
-        LevelOneMixer.SetFloat("Volume", volume);
+        LevelOneMixer.SetFloat("LevelOneVolume", volume);
     }
     public void QuitGame()
     {
@@ -28,6 +28,10 @@ public class LevelOnePauseMenu : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     //Pause and Resume
     public void Start()
