@@ -1,9 +1,11 @@
 using System.Collections;
+using System.Diagnostics;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] enemyPrefabs; // Assign your enemy prefabs in the inspector
+    public GameObject warningScreen;
     public int waveNumber = 1;
     private float spawnInterval = 2.0f;
     private int enemiesToSpawn = 5;
@@ -48,7 +50,8 @@ public class EnemySpawner : MonoBehaviour
                 // Reward player for surviving a wave
                 UIManager.Instance.AddCoins(coinsForWaveCompletion);
 
-                yield return new WaitForSeconds(10); // Wait before next wave
+                yield return new WaitForSecondsRealtime(60); // Wait before next wave
+                
                 
             
             
