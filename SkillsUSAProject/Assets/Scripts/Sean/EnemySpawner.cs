@@ -50,7 +50,7 @@ public class EnemySpawner : MonoBehaviour
                 // Reward player for surviving a wave
                 UIManager.Instance.AddCoins(coinsForWaveCompletion);
 
-                yield return new WaitForSecondsRealtime(60); // Wait before next wave
+                yield return new WaitForSecondsRealtime(30); // Wait before next wave
                 
                 
             
