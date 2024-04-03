@@ -4,6 +4,8 @@ public class Projectile : MonoBehaviour
 {
     public float speed = 10f;
     private Transform target;
+    EnemySpawner enemySpawner;
+    GameManager gameManager;
 
     public void Seek(Transform _target)
     {
@@ -38,6 +40,7 @@ public class Projectile : MonoBehaviour
     {
         Destroy(target.gameObject); // Destroy the enemy
         Destroy(gameObject); // Destroy the projectile
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -46,5 +49,11 @@ public class Projectile : MonoBehaviour
         {
             HitTarget();
         }
+    }
+
+    private void Start()
+    {
+        enemySpawner = GetComponent<EnemySpawner>();
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 }

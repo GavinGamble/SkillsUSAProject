@@ -6,12 +6,10 @@ public class EnemySpawner : MonoBehaviour
 {
     public GameObject[] enemyPrefabs; // Assign your enemy prefabs in the inspector
     public GameObject warningScreen;
-    public int waveNumber = 1;
     private float spawnInterval = 2.0f;
     private int enemiesToSpawn = 5;
-    private int enemyCount = 0;
     private int coinsForWaveCompletion = 10; // Coins awarded for completing a wave
-    private int coinsForKill = 2; // Coins awarded for each enemy kill
+    public int coinsForKill = 2; // Coins awarded for each enemy kill
 
     GameManager gameManager;
 
@@ -40,20 +38,22 @@ public class EnemySpawner : MonoBehaviour
                 // Increase for next wave
                 
 
-                waveNumber++;
+                gameManager.waveNumber++;
                 enemiesToSpawn += 2; // Increase the number of enemies per wave
                 gameManager.enemiesAlive = enemiesToSpawn; // JASON : makes the enemy count match the amount spawned
                 spawnInterval *= 0.9f; // Optional: decrease spawn interval to make it harder
                                        // Update wave number in UI
-                UIManager.Instance.UpdateWaveNumber(waveNumber);
+            gameManager.coinCount = gameManager.coinCount + coinsForWaveCompletion;
 
-                // Reward player for surviving a wave
-                UIManager.Instance.AddCoins(coinsForWaveCompletion);
-
-                yield return new WaitForSecondsRealtime(30); // Wait before next wave
-                
-                
             
+                UIManager.Instance.UpdateWaveNumber(gameManager.waveNumber);
+
+            // Reward player for surviving a wave
+            UIManager.Instance.AddCoins(coinsForWaveCompletion);
+
+            
+
+                yield return new WaitForSeconds(30); // Wait before next wave
             
         }
     }
@@ -67,10 +67,10 @@ public class EnemySpawner : MonoBehaviour
     public int ChooseEnemyIndex()
     {
         // Simple logic to increase the chance of harder enemies over waves
-        float progress = (float)waveNumber / 10; // Adjust this based on your game's difficulty curve
-        float randomNumber = Random.Range(0f, 1f);
+        float progress = (float)gameManager.waveNumber / 10; // Adjust this based on your game's difficulty curve
+        float randomNumber = Random.Range(0f, 1f); 
 
-        if (randomNumber < progress && waveNumber > 5) // Adjust conditions based on your needs
+        if (randomNumber < progress && gameManager.waveNumber > 5) // Adjust conditions based on your needs
         {
             return Random.Range(1, enemyPrefabs.Length); // Spawn harder enemies
         }
@@ -82,6 +82,6 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 }

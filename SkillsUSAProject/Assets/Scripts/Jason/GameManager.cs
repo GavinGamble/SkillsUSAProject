@@ -15,7 +15,11 @@ public class GameManager : MonoBehaviour
     public int enemiesAlive; //counts how many enemies are present in the scene so you can progress when enemies = 0
     public int towerHealth = 200;
     public int currentHealth;
+    public int coinCount;
+    public int towerCost = -10;
+    public int waveNumber = 1;
     public bool stopGame;
+
 
     EnemySpawner enemySpawner;
 
@@ -23,26 +27,37 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         enemySpawner = GetComponent<EnemySpawner>();
-        stopGame = false;
+        
     }
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = towerHealth;
+        waveNumber = 1;
+        coinCount = 15;
+        UIManager.Instance.UpdateWaveNumber(waveNumber);
         
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log(coinCount);
         if (currentHealth < 1)
         {
-            gameOverScreen.SetActive(true); return;
+            gameOverScreen.SetActive(true);
+            Destroy(GameObject.Find("EnemySpawner"));
+            return;
         }
-    }
 
-    private void GameStop()
-    {
-   
+        if (waveNumber == 10)
+        {
+            if (enemiesAlive >= 0)
+            {
+                Destroy(GameObject.Find("EnemySpawner"));
+                winScreen.SetActive(true);
+            }
+        }
     }
 }

@@ -9,10 +9,12 @@ public class PlaceTowers : MonoBehaviour
     [SerializeField] private LayerMask PlacementCollider;
     [SerializeField] private Camera PlayersCamera;
     private GameObject TowerToPlace;
+    GameManager gameManager;
+    
     // Start is called before the first frame update
     void Start()
     {
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
@@ -54,7 +56,18 @@ public class PlaceTowers : MonoBehaviour
 
     public void PlaceTower(GameObject Tower)
     {
-        TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0, 0, 0));
+        if(gameManager.coinCount >= 10)
+        {
+            TowerToPlace = Instantiate(Tower, Vector3.zero, Quaternion.Euler(0, 0, 0));
+            gameManager.coinCount = gameManager.coinCount + gameManager.towerCost;
+            UIManager.Instance.AddCoins(gameManager.towerCost);
+
+        }
+        else
+        {
+            Debug.Log("Not Enough Coins!");
+        }
+
     }
     public void QuitGame()
     {
