@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
                 
 
                 gameManager.waveNumber++;
-                enemiesToSpawn += 2; // Increase the number of enemies per wave
+                enemiesToSpawn += 5; // Increase the number of enemies per wave
                 gameManager.enemiesAlive = enemiesToSpawn; // JASON : makes the enemy count match the amount spawned
                 spawnInterval *= 0.9f; // Optional: decrease spawn interval to make it harder
                                        // Update wave number in UI

@@ -51,7 +51,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        if (waveNumber == 10)
+        if (waveNumber == 60)
         {
             if (enemiesAlive >= 0)
             {
